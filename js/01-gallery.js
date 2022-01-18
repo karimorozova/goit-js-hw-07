@@ -37,10 +37,7 @@ function onGalleryClick(event) {
     const gallery = basicLightbox.create(`<img
     class="gallery__image"
     src="${event.target.dataset.source}"
-  />`, {
-    onShow: () => {
-        document.addEventListener('keydown', onEscapeKeyPress) = gallery.close();
-    }})
+  />`);
 
     gallery.show();
     // console.log(gallery);
@@ -56,8 +53,8 @@ function onGalleryClick(event) {
             console.log('remove')
         
      }
-    // gallery.onShow = () =>  document.addEventListener('keydown', onEscapeKeyPress);
-    // gallery.onShow();
+    gallery.onShow = () =>  document.addEventListener('keydown', onEscapeKeyPress);
+    gallery.onShow();
 
     // gallery.onClose = () => document.removeEventListener('keydown', onEscapeKeyPress);
     // // // gallery.onClose()
