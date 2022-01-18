@@ -40,11 +40,7 @@ function onGalleryClick(event) {
   />`);
 
     gallery.show();
-    // console.log(gallery);
 
-    
-   
-    document.addEventListener('keydown', onEscapeKeyPress);
     function onEscapeKeyPress(event) {
         if(event.code === 'Escape'){
              gallery.close()
@@ -53,28 +49,15 @@ function onGalleryClick(event) {
             console.log('remove')
         
      }
-    gallery.onShow = () =>  document.addEventListener('keydown', onEscapeKeyPress);
+    gallery.onShow = () =>  window.addEventListener('keydown', onEscapeKeyPress);
     gallery.onShow();
 
-    // gallery.onClose = () => document.removeEventListener('keydown', onEscapeKeyPress);
-    // // // gallery.onClose()
+    if(!gallery.visible) {
+        window.removeEventListener('keydown', onEscapeKeyPress)
+    }
 
-    // console.log(gallery.visible())
-
-    // // gallery.visible() ? document.addEventListener('keydown', onEscapeKeyPress) : document.removeEventListener('keydown', onEscapeKeyPress);
-
-    // if(!gallery.visible()) {
-    //     gallery.onClose()
-    // } 
-
-    // document.removeEventListener('keydown', onEscapeKeyPress);
-
-    // gallery.close(() => document.removeEventListener('keydown', onEscapeKeyPress))
+    
     
 
 }
-
-
-// document.removeEventListener('keydown', onEscapeKeyPress);
-
 
