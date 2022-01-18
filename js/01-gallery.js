@@ -31,33 +31,30 @@ galleryRef.addEventListener('click', onGalleryClick);
 function onGalleryClick(event) {
 
     event.preventDefault();
+
     if(event.target.nodeName !== 'IMG') return;
   
 
     const gallery = basicLightbox.create(`<img
     class="gallery__image"
     src="${event.target.dataset.source}"
-  />`);
+  />`, {
+    onClose: () => window.removeEventListener('keydown', onEscapeKeyPress),
+
+    onShow: () =>  window.addEventListener('keydown', onEscapeKeyPress),
+
+});
 
     gallery.show();
+    
 
     function onEscapeKeyPress(event) {
         if(event.code === 'Escape'){
              gallery.close()
             }
 
-            console.log('remove')
         
      }
-    gallery.onShow = () =>  window.addEventListener('keydown', onEscapeKeyPress);
-    gallery.onShow();
-
-    if(!gallery.visible) {
-        window.removeEventListener('keydown', onEscapeKeyPress)
-    }
-
     
-    
-
 }
 
