@@ -6,27 +6,6 @@ console.log(galleryItems);
 const galleryRef = document.querySelector('.gallery');
 console.log(galleryRef);
 
-// const galImg = galleryItems.map(img => `
-// <div class="gallery__item">
-// <a class="gallery__link" href="${img.original}">
-// <img
-//   class="gallery__image"
-//   src="${img.preview}"
-//   data-source="${img.original}"
-//   alt="${img.description}"
-// />
-// </a>
-// </div>
-// `);
-
-// console.log(galImg);
-
-// galImg.forEach(el => console.log(el))
-
-// const galleryStr = galImg.join('');
-// // console.log(galleryStr);
-// galleryRef.insertAdjacentHTML('beforeend', galleryStr );
-
 
 const renderGallery = arr => {
     const galleryStr = arr.map(img => `
@@ -47,16 +26,13 @@ const renderGallery = arr => {
 
 renderGallery(galleryItems);
 
-// const el = document.querySelector('.gallery__image');
-// console.log(el)
-
 galleryRef.addEventListener('click', onGalleryClick);
 
 function onGalleryClick(event) {
 
     event.preventDefault();
     if(event.target.nodeName !== 'IMG') return;
-   
+  
 
     const gallery = basicLightbox.create(`<img
     class="gallery__image"
@@ -64,23 +40,41 @@ function onGalleryClick(event) {
   />`);
 
     gallery.show();
-    console.log(gallery);
+    // console.log(gallery);
 
-    // gallery.close(() => console.log('lightbox not visible anymore'))
-    // gallery.onShow = (instance) => {
-    //     document.addEventListener('keydown', onEscapeKeyPress)
-    // };
-
-    // gallery.onShow();
-
-    // onclose: (instance) => document.removeEventListener('keydown', onEskapeKeyPress)
-
-}
-document.addEventListener('keydown', onEscapeKeyPress);
-
-function onEscapeKeyPress(event) {
-    if(event.code === 'Escape'){
-         gallery.close()
-        }
     
+   
+    document.addEventListener('keydown', onEscapeKeyPress);
+    function onEscapeKeyPress(event) {
+        if(event.code === 'Escape'){
+             gallery.close()
+            }
+
+            console.log('remove')
+        
+     }
+    gallery.onShow = () =>  document.addEventListener('keydown', onEscapeKeyPress);
+    gallery.onShow();
+
+    gallery.onClose = () => document.removeEventListener('keydown', onEscapeKeyPress);
+    // // gallery.onClose()
+
+    console.log(gallery.visible())
+
+    // gallery.visible() ? document.addEventListener('keydown', onEscapeKeyPress) : document.removeEventListener('keydown', onEscapeKeyPress);
+
+    if(!gallery.visible()) {
+        gallery.onClose()
+    } 
+
+    // document.removeEventListener('keydown', onEscapeKeyPress);
+
+    // gallery.close(() => document.removeEventListener('keydown', onEscapeKeyPress))
+    
+
 }
+
+
+// document.removeEventListener('keydown', onEscapeKeyPress);
+
+
