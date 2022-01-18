@@ -11,7 +11,13 @@ console.log(galleryRef);
 
 
 renderGallery(galleryItems);
-galleryRef.addEventListener('click', onGalleryClick);
+
+
+let gallery = new SimpleLightbox('.gallery__item');
+    gallery.on('show.simplelightbox');
+
+
+galleryRef.addEventListener('click', (event) => event.preventDefault());
 
 
 function renderGallery(arr) {
@@ -32,10 +38,8 @@ function renderGallery(arr) {
     galleryRef.insertAdjacentHTML('beforeend', galleryStr );
 }
 
-function onGalleryClick(event) {
-    event.preventDefault();
+// function onGalleryClick(event) {
 
-    let gallery = new SimpleLightbox('.gallery__item');
-    gallery.on('show.simplelightbox');
+//     event.preventDefault();}
    
-}
+
